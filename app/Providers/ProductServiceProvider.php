@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use App\Http\Services\Decorators\ErrorLogDecoratedProductService;
-use App\Http\Services\Interfaces\ProductServiceInterface;
-use App\Http\Services\ProductService;
+use App\Notifiers\Interfaces\ProductChangesNotifierInterface;
+use App\Notifiers\ProductChangesNullNotifier;
+use App\Services\Decorators\ErrorLogDecoratedProductService;
+use App\Services\Interfaces\ProductServiceInterface;
+use App\Services\ProductService;
 use Illuminate\Support\ServiceProvider;
 
 class ProductServiceProvider extends ServiceProvider
@@ -17,5 +19,10 @@ class ProductServiceProvider extends ServiceProvider
                 'logger' => $this->app->make('log'),
             ]);
         });
+
+        $this->app->singleton(
+            ProductChangesNotifierInterface::class,
+            ProductChangesNullNotifier::class
+        );
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\SaveRequest;
-use App\Http\Services\Interfaces\ProductServiceInterface;
 use App\Models\Product;
+use App\Services\Interfaces\ProductServiceInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Services\Decorators;
+namespace App\Services\Decorators;
 
-use App\Http\Services\Interfaces\ProductServiceInterface;
 use App\Models\Product;
+use App\Services\Interfaces\ProductServiceInterface;
 use Psr\Log\LoggerInterface;
 
 class ErrorLogDecoratedProductService implements ProductServiceInterface
