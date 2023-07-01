@@ -7,6 +7,7 @@ use App\Http\Services\Interfaces\ProductServiceInterface;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
@@ -27,14 +28,14 @@ class ProductController extends Controller
         return view('product.edit-add');
     }
 
-    public function store(SaveRequest $request): void
+    public function store(SaveRequest $request): RedirectResponse
     {
         $product = $this->productService->create($request->validated());
         if (!$product) {
-            redirect()->back()->withErrors('Can not create product!');
+            return redirect()->back()->withErrors('Can not create product!');
         }
 
-        redirect()->route('products.show', ['product' => $product]);
+        return redirect()->route('products.show', ['product' => $product]);
     }
 
 
@@ -43,22 +44,22 @@ class ProductController extends Controller
         return view('product.edit-add', ['product' => $product]);
     }
 
-    public function update(SaveRequest $request, Product $product): void
+    public function update(SaveRequest $request, Product $product): RedirectResponse
     {
         $product = $this->productService->update($product, $request->validated());
         if (!$product) {
-            redirect()->back()->withErrors('Can not update product!');
+            return redirect()->back()->withErrors('Can not update product!');
         }
 
-        redirect()->route('products.show', [$product]);
+        return redirect()->route('products.show', ['product' => $product]);
     }
 
-    public function destroy(Product $product): void
+    public function destroy(Product $product): RedirectResponse
     {
         if (!$this->productService->delete($product)) {
-            redirect()->back()->withErrors('Can not delete product!');
+            return redirect()->back()->withErrors('Can not delete product!');
         }
 
-        redirect()->route('products.index');
+        return redirect()->route('products.index');
     }
 }
