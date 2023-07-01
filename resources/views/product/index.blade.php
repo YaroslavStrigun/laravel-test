@@ -12,7 +12,7 @@
             <td>{{ $product->name }}</td>
             <td>{{ $product->description }}</td>
             <td>{{ $product->price }}</td>
-            <td>{{ $product->is_active ? 'True' : 'False' }}</td>
+            <td style="color: {{ $product->color }}">{{ $product->is_active ? 'True' : 'False' }}</td>
             <td>
                 <a href="{{ route('products.show', [$product]) }}">Edit</a>
             </td>
