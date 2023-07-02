@@ -32,7 +32,11 @@ class SaveRequest extends FormRequest
                 'numeric',
                 'max:99999999,99',
                 'regex:/^\d+(\.\d{1,2})?$/',
-            ]
+            ],
+            'is_active' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 
@@ -47,5 +51,12 @@ class SaveRequest extends FormRequest
         }
 
         return $rule->ignoreModel($product);
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'is_active' => (bool)$this->get('is_active'),
+        ]);
     }
 }
